@@ -1,11 +1,12 @@
 import React from 'react'
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Header() {
     return (
         <header
             id="header"
-            className="flex flex-col px-6 pt-4 sm:pt-1 text-white bg-primary w-full items-center"
+            className="flex flex-col sm:flex-row px-6 pt-4 sm:pt-1 text-white bg-primary w-full items-center"
         >
             <div className='flex flex-col sm:flex-row w-full items-center'>
                 <Image
@@ -17,6 +18,9 @@ export default function Header() {
                 <h1 id="title" className="text-xl my-2 mx-4">
                     Ik werk op kantoor deze week
                 </h1>
+            </div>
+            <div id='navigation' className='pb-4 sm:pb-0'>
+                <Link className='hover:underline' href={'/login'} >Login</Link>
             </div>
         </header>
     )
