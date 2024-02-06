@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image';
-import Link from 'next/link';
+import AuthButton from './AuthButton';
 
 export default function Header() {
     return (
@@ -20,7 +20,7 @@ export default function Header() {
                 </h1>
             </div>
             <div id='navigation' className='pb-4 sm:pb-0'>
-                <Link className='hover:underline' href={'/login'} >Login</Link>
+                <AuthButton />
             </div>
         </header>
     )
