@@ -22,7 +22,7 @@ export default async function AuthButton() {
 
     return user ? (
         <div className="flex items-center gap-4">
-            {user.email}
+            {user.email!.charAt(0).toUpperCase() + user.email!.slice(1).substring(0, user.email!.indexOf("@") - 1)}
             <form action={signOut}>
                 <button className="py-2 px-4 hover:underline">
                     Logout
