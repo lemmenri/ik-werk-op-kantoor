@@ -1,25 +1,26 @@
 import { useState } from 'react'
 import { Switch } from '@headlessui/react'
 
-export default function Toggle({ name, label, onToggle, checked = false, disabled = false }: { name: string, label?: string, onToggle: any, checked?: boolean, disabled?: boolean }) {
+export default function Toggle({ name, label, onToggle, index, checked = false, disabled = false }: { name: string, label?: string, onToggle: any, index: number, checked?: boolean, disabled?: boolean }) {
     const [enabled, setEnabled] = useState(checked)
 
     const handleChange = () => {
+        const newState = !enabled
         if (disabled === false) {
-            setEnabled(!enabled);
-            onToggle();
+            setEnabled(newState);
+            onToggle(index, newState);
         }
     }
 
     return (
         <Switch.Group>
-            <div className='flex space-x-2 items-center'>
+            <div className='space-x-2'>
 
                 <Switch
                     id={name}
                     checked={enabled}
                     onChange={handleChange}
-                    className={`${enabled ? 'bg-primary dark:bg-light' : 'bg-light dark:bg-primary'
+                    className={`${enabled ? 'bg-green-600 dark:bg-light' : 'bg-light dark:bg-primary'
                         } ${disabled && "hover:cursor-default"} relative inline-flex h-4 w-9 items-center rounded-full border border-dark dark:border-light`}
                 >
                     <span className="sr-only">{label}</span>
