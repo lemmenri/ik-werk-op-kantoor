@@ -17,11 +17,11 @@ export default function Table({ headers, data, name, editable, updateAanwezighei
             {data.length === 0
                 ? <p>Loading...</p>
                 :
-                <table key={name} id={name} className="table-auto border-collapse border border-dark bg-primary text-white py-1 px-2 w-full">
+                <table key={name} id={name} className="table-auto border border-dark bg-primary text-white py-1 px-2 w-full">
                     <thead>
                         <tr>
                             {headers.map((column, index) => (
-                                <th id={`header-${column}`} key={index} className={`border border-primary font-normal text-left px-2 ${index !== 0 && "text-center"} ${index === 0 && "w-1/6"}`}>
+                                <th id={`header-${column}`} key={index} className={`border border-primary font-normal text-left px-2 ${index !== 0 ? "text-center" : "w-1/6 sticky left-0 bg-primary"}`}>
                                     {column}
                                 </th>
                             ))}
@@ -34,11 +34,13 @@ export default function Table({ headers, data, name, editable, updateAanwezighei
                                     <td
                                         id={`${index}-${colIndex}`}
                                         key={`${index}-${colIndex}`}
-                                        className={`border border-x-0 border-primary dark:border-light py-1 px-2 ${colIndex !== 0 && "text-center justify-center"}`}
+                                        className={`border border-y-1 border-x-0 dark:border-light border-primary my-1 mx-2 ${colIndex !== 0 ? "text-center" : "sticky left-0 bg-light dark:bg-dark z-10"}`}
                                     >
-                                        {colIndex === 0 && column}
-                                        {colIndex !== 0 && editable === false && (column === true ? "✅" : "❌")}
-                                        {colIndex !== 0 && editable === true && <Toggle name={`toggle-${index}-${colIndex}`} onToggle={printState} index={colIndex} checked={typeof (column) === 'boolean' ? column : false} disabled={false} />}
+                                        <div className={`${colIndex !== 0 ? "" : "px-2 border border-y-0 border-r-1 border-l-0 dark:border-l-2 border-primary dark:border-light"}`}>
+                                            {colIndex === 0 && column}
+                                            {colIndex !== 0 && editable === false && (column === true ? "✅" : "❌")}
+                                            {colIndex !== 0 && editable === true && <Toggle name={`toggle-${index}-${colIndex}`} onToggle={printState} index={colIndex} checked={typeof (column) === 'boolean' ? column : false} disabled={false} />}
+                                        </div>
                                     </td>
                                 ))}
                             </tr>

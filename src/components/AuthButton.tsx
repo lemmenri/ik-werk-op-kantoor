@@ -1,5 +1,4 @@
 import { createClient } from "@/utils/supabase/server";
-import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -17,10 +16,10 @@ export default async function AuthButton() {
         const cookieStore = cookies();
         const supabase = createClient(cookieStore);
         await supabase.auth.signOut();
-        return redirect("/login");
+        return redirect("/");
     };
 
-    return user ? (
+    return user && (
         <div className="flex items-center gap-4">
             {user.email!.charAt(0).toUpperCase() + user.email!.slice(1).substring(0, user.email!.indexOf("@") - 1)}
             <form action={signOut}>
@@ -29,12 +28,5 @@ export default async function AuthButton() {
                 </button>
             </form>
         </div>
-    ) : (
-        <Link
-            href="/login"
-            className="py-2 px-3 flex hover:underline"
-        >
-            Login
-        </Link>
-    );
+    )
 }

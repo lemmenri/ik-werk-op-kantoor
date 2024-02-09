@@ -92,11 +92,11 @@ export default function Aanwezigheid({ selectedMonday, offset, editedDays }: { s
                 <p>De rest komt deze dagen op kantoor:</p>
                 <div className="flex justify-between items-center max-w-3xl">
                     <div className="flex space-x-4 items-center justify-center w-full">
-                        <button className="border bg-primary px-4 py-0 rounded-lg text-light hover:underline" onClick={() => (offset(-1))}>
+                        <button id="previous-week" aria-label="Previous week" className="border bg-primary px-4 py-0 rounded-lg text-light hover:underline" onClick={() => (offset(-1))}>
                             <ChevronLeftIcon className="w-6" />
                         </button>
                         <p>{`Week ${selectedMonday.toFormat('dd-MMM')} - ${selectedMonday.plus({ days: 4 }).toFormat('dd-MMM')}  :`}</p>
-                        <button className="border bg-primary px-4 py-0 rounded-lg text-light hover:underline" onClick={() => (offset(1))}>
+                        <button id="next-week" aria-label="Next week" className="border bg-primary px-4 py-0 rounded-lg text-light hover:underline" onClick={() => (offset(1))}>
                             <ChevronRightIcon className="w-6" />
                         </button>
                     </div>
