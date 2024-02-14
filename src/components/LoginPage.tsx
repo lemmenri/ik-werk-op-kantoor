@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default function LoginPage({
     searchParams,
@@ -27,6 +28,15 @@ export default function LoginPage({
         return redirect("/");
     };
 
+    // const forgotPassword = async () => {
+    //     const cookieStore = cookies();
+    //     const supabase = createClient(cookieStore);
+    //     const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+    //         redirectTo: 'https://example.com/update-password',
+    //       })
+
+    // }
+
     return (
         <main id="body" className="flex flex-col py-8 px-4 sm:px-8 w-full space-y-8 grow">
             <form
@@ -34,7 +44,7 @@ export default function LoginPage({
                 action={signIn}
             >
                 <label className="" htmlFor="email">
-                    Email
+                    E-mail
                 </label>
                 <input
                     className="rounded-md px-4 py-2 bg-inherit border mb-6"
@@ -58,6 +68,12 @@ export default function LoginPage({
                 <button className="border bg-primary px-4 py-1 rounded-lg text-light hover:underline">
                     Sign In
                 </button>
+                <Link
+                    href="/reset"
+                    className="text-center border bg-light px-4 py-1 rounded-lg text-primary hover:underline"
+                >
+                    Forgot password?
+                </Link>
 
                 {searchParams?.message && (
                     <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
