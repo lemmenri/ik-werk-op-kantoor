@@ -38,7 +38,7 @@ export default function Table({ headers, data, name, editable, updateAanwezighei
                                     >
                                         <div className={`${colIndex !== 0 ? "" : "px-2 border border-y-0 border-r-1 border-l-0 dark:border-l-2 border-primary dark:border-light"}`}>
                                             {colIndex === 0 && column}
-                                            {colIndex !== 0 && editable === false && (column === true ? "✅" : "❌")}
+                                            {colIndex !== 0 && editable === false && (column === true ? "✅" : (column === false ? "❌" : "❔"))}
                                             {colIndex !== 0 && editable === true && <Toggle name={`toggle-${index}-${colIndex}`} onToggle={printState} index={colIndex} checked={typeof (column) === 'boolean' ? column : false} disabled={false} />}
                                         </div>
                                     </td>

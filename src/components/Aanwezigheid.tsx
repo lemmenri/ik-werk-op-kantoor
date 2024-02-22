@@ -15,7 +15,7 @@ const tableHeaders = [
     "Vrijdag",
 ]
 
-export type AanwezigheidData = ([string, boolean, boolean, boolean, boolean, boolean])[]
+export type AanwezigheidData = ([string, (boolean | undefined), (boolean | undefined), (boolean | undefined), (boolean | undefined), (boolean | undefined)])[]
 type RawAanwezigheidData = { is_present: boolean, user: { user_name: string }, work_day: string }[]
 type CleanedAanwezigheidData = { username: string, workday: string, isPresent: boolean }[]
 type Usernames = { user_name: string }[]
@@ -65,9 +65,8 @@ export default function Aanwezigheid({ selectedMonday, offset, editedDays }: { s
         return aanwezigheid
     }
 
-    function isPresent(data: CleanedAanwezigheidData, day: string | null, user: string): boolean {
-        const isPresent = data.find((element) => (element.username === user && element.workday === day))?.isPresent
-        return isPresent ? isPresent : false
+    function isPresent(data: CleanedAanwezigheidData, day: string | null, user: string): boolean | undefined {
+        return data.find((element) => (element.username === user && element.workday === day))?.isPresent
     }
 
     const getTableData = async () => {
@@ -92,11 +91,26 @@ export default function Aanwezigheid({ selectedMonday, offset, editedDays }: { s
                 <p>De rest komt deze dagen op kantoor:</p>
                 <div className="flex justify-between items-center max-w-3xl">
                     <div className="flex space-x-4 items-center justify-center w-full">
-                        <button id="previous-week" aria-label="Previous week" className="border bg-primary px-4 py-0 rounded-lg text-light hover:underline" onClick={() => (offset(-1))}>
-                            <ChevronLeftIcon className="w-6" />
-                        </button>
+                        {
+                            (selectedMonday >= DateTime.now().minus({ days: 7 })) ?
+                                <button
+                                    id="previous-week"
+                                    aria-label="Previous week"
+                                    className="border bg-primary px-4 py-0 rounded-lg text-light hover:underline"
+                                    onClick={() => (offset(-1))}
+                                >
+                                    <ChevronLeftIcon className="w-6" />
+                                </button>
+                                :
+                                <div className="w-14"></div>
+                        }
                         <p>{`Week ${selectedMonday.toFormat('dd-MMM')} - ${selectedMonday.plus({ days: 4 }).toFormat('dd-MMM')}  :`}</p>
-                        <button id="next-week" aria-label="Next week" className="border bg-primary px-4 py-0 rounded-lg text-light hover:underline" onClick={() => (offset(1))}>
+                        <button
+                            id="next-week"
+                            aria-label="Next week"
+                            className="border bg-primary px-4 py-0 rounded-lg text-light hover:underline"
+                            onClick={() => (offset(1))}
+                        >
                             <ChevronRightIcon className="w-6" />
                         </button>
                     </div>

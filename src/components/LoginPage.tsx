@@ -34,15 +34,15 @@ export default function LoginPage({
     //     const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
     //         redirectTo: 'https://example.com/update-password',
     //       })
-
     // }
 
     return (
-        <main id="body" className="flex flex-col py-8 px-4 sm:px-8 w-full space-y-8 grow">
+        <main id="body" className="flex flex-col py-8 px-4 sm:px-8 w-full space-y-8 grow items-stretch sm:items-center">
             <form
                 className="flex flex-col space-y-4 max-w-md"
                 action={signIn}
             >
+                <h1 className="font-semibold text-xl mb-4">Login</h1>
                 <label className="" htmlFor="email">
                     E-mail
                 </label>
@@ -68,12 +68,12 @@ export default function LoginPage({
                 <button className="border bg-primary px-4 py-1 rounded-lg text-light hover:underline">
                     Sign In
                 </button>
-                <Link
+                {/* <Link
                     href="/reset"
                     className="text-center border bg-light px-4 py-1 rounded-lg text-primary hover:underline"
                 >
                     Forgot password?
-                </Link>
+                </Link> */}
 
                 {searchParams?.message && (
                     <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">

@@ -21,7 +21,7 @@ export default function AanwezigheidPage() {
     }
 
     return (
-        <main id="body" className="flex flex-col py-8 px-4 sm:px-8 w-full space-y-2 grow">
+        <main id="body" className="flex flex-col py-8 px-4 sm:px-8 w-full space-y-2 grow items-center">
             <Edit selectedMonday={selectedMonday} setEditedDays={setEditedDays} />
             <Aanwezigheid selectedMonday={selectedMonday} offset={offset} editedDays={editedDays} />
         </main>
